@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    img.resize(2);
 }
 
 MainWindow::~MainWindow()
@@ -15,10 +16,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_pushButton_loadImage_clicked()
 {
-     cv::UMat img[2];
      fileName = QFileDialog::getOpenFileName(this,tr("Open File"));
      imgSrc = cv::imread(fileName.toStdString());
-
      if(!imgSrc.empty())
      {
          for(int i=0;i<2;i++)
@@ -50,3 +49,17 @@ void MainWindow::on_pushButton_loadImage_clicked()
      }
 }
 
+
+
+
+void MainWindow::on_pushButton_saveImage_clicked()
+{
+    fileName = QFileDialog::getSaveFileName(this,tr("Close File"));
+    if(!fileName.isEmpty())
+        for(int i =0; i < img.size();i++)
+        {
+            QString a = fileName + "_"+QString::number(i)+".png";
+            if(!img[i].empty())
+                cv::imwrite(a.toStdString(),img[i]);
+        }
+}

@@ -2,8 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QFileDialog>
-#include <vector>
 #include "opencv.hpp"
 
 namespace Ui {
@@ -18,17 +16,9 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
-private slots:
-    void on_pushButton_loadImage_clicked();
-
-
-    void on_pushButton_saveImage_clicked();
-
 private:
     Ui::MainWindow *ui;
-    QString fileName;
-    cv::Mat imgSrc;
-    std::vector<cv::UMat> img;
+    cv::UMat mat;
 };
 
 #endif // MAINWINDOW_H
