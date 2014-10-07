@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QFileDialog>
 #include "opencv.hpp"
 
 namespace Ui {
@@ -16,9 +17,16 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+private slots:
+    void on_actionOpen_Image_triggered();
+
+    void on_actionHistogram_triggered();
+
 private:
     Ui::MainWindow *ui;
-    cv::UMat mat;
+    QString fileName;
+    cv::Mat mat;
+    std::vector<cv::Mat> bgr_planes;
 };
 
 #endif // MAINWINDOW_H
