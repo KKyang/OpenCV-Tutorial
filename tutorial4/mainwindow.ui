@@ -55,6 +55,7 @@
     </property>
     <addaction name="actionHistogram"/>
     <addaction name="actionHistogram_Equalization"/>
+    <addaction name="actionHistogram_Equalization_Color"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuImgProc"/>
@@ -81,6 +82,11 @@
   <action name="actionHistogram_Equalization">
    <property name="text">
     <string>Histogram Equalization</string>
+   </property>
+  </action>
+  <action name="actionHistogram_Equalization_Color">
+   <property name="text">
+    <string>Histogram Equalization (Color)</string>
    </property>
   </action>
  </widget>

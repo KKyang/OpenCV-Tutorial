@@ -24,6 +24,8 @@ private slots:
 
     void on_actionHistogram_Equalization_triggered();
 
+    void on_actionHistogram_Equalization_Color_triggered();
+
 private:
     Ui::MainWindow *ui;
     QString fileName;

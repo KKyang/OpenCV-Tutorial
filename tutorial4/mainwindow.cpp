@@ -106,10 +106,10 @@ void MainWindow::on_actionHistogram_Equalization_triggered()
 {
     if(!mat.empty())
     {
-        cv::Mat src = mat;
+        cv::Mat src;
         cv::Mat dst;
         // Convert to grayscale
-        cv::cvtColor( src, src, cv::COLOR_BGR2GRAY );
+        cv::cvtColor( mat, src, cv::COLOR_BGR2GRAY );
 
         // Apply Histogram Equalization
         cv::equalizeHist( src, dst );
@@ -119,6 +119,38 @@ void MainWindow::on_actionHistogram_Equalization_triggered()
         cv::namedWindow( "Equalized Image", cv::WINDOW_AUTOSIZE );
 
         cv::imshow( "Source image", src );
+        cv::imshow( "Equalized Image", dst );
+
+        // Wait until user exits the program
+        cv::waitKey(0);
+    }
+}
+
+void MainWindow::on_actionHistogram_Equalization_Color_triggered()
+{
+    if(!mat.empty())
+    {
+        cv::Mat ycrcb;
+        cv::Mat dst;
+        // Convert to YCrCb
+        cv::cvtColor( mat, ycrcb, cv::COLOR_BGR2YCrCb);
+
+        //Split into three channels
+        std::vector<cv::Mat> channels;
+        split(ycrcb, channels);
+
+        // Only apply Histogram Equalization on Y channel
+        cv::equalizeHist( channels[0], channels[0] );
+
+        //Merge channels back
+        merge(channels,ycrcb);
+        cv::cvtColor(ycrcb,dst,cv::COLOR_YCrCb2BGR);
+
+        // Display results
+        cv::namedWindow( "Source image", cv::WINDOW_AUTOSIZE );
+        cv::namedWindow( "Equalized Image", cv::WINDOW_AUTOSIZE );
+
+        cv::imshow( "Source image", mat );
         cv::imshow( "Equalized Image", dst );
 
         // Wait until user exits the program
