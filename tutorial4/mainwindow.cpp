@@ -108,20 +108,20 @@ void MainWindow::on_actionHistogram_Equalization_triggered()
     {
         cv::Mat src = mat;
         cv::Mat dst;
-        /// Convert to grayscale
+        // Convert to grayscale
         cv::cvtColor( src, src, cv::COLOR_BGR2GRAY );
 
-        /// Apply Histogram Equalization
+        // Apply Histogram Equalization
         cv::equalizeHist( src, dst );
 
-        /// Display results
+        // Display results
         cv::namedWindow( "Source image", cv::WINDOW_AUTOSIZE );
         cv::namedWindow( "Equalized Image", cv::WINDOW_AUTOSIZE );
 
         cv::imshow( "Source image", src );
         cv::imshow( "Equalized Image", dst );
 
-        /// Wait until user exits the program
+        // Wait until user exits the program
         cv::waitKey(0);
     }
 }
