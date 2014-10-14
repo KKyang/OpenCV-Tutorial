@@ -121,7 +121,9 @@ void MainWindow::on_actionHistogram_Equalization_triggered()
         cv::imshow( "Source image", src );
         cv::imshow( "Equalized Image", dst );
 
-        // Wait until user exits the program
+        cv::imwrite("grayscale image.png", src);
+        cv::imwrite("his equalized.png", dst);
+
         cv::waitKey(0);
     }
 }
@@ -153,7 +155,9 @@ void MainWindow::on_actionHistogram_Equalization_Color_triggered()
         cv::imshow( "Source image", mat );
         cv::imshow( "Equalized Image", dst );
 
-        // Wait until user exits the program
+        cv::imwrite("YCrCb image.png", ycrcb);
+        cv::imwrite("his equalized color.png", dst);
+
         cv::waitKey(0);
     }
 }
