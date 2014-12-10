@@ -74,15 +74,16 @@ void MainWindow::on_actionBlob_triggered()
     cv::Mat frame = mat.clone();
 
     //Two ways - Method one.
-    /*
+
     for (int i = 0; i < keypoints.size(); i++)
     {
         cv::circle(frame, cv::Point(keypoints[i].pt.x, keypoints[i].pt.y), 5, cv::Scalar(255, 0, 0), -1);
-        std::cout << keypoints[i].size << std::endl;
-    }*/
+        //std::cout << keypoints[i].size << std::endl;
+    }
+    /*
     //Two ways - Method two.
     cv::drawKeypoints(mat, keypoints, frame);
-
+    */
     for(auto blobIterator = keypoints.begin(); blobIterator != keypoints.end(); blobIterator++){
        std::cout << "size of blob is: " << blobIterator->size << std::endl;
        std::cout << "point is at: " << blobIterator->pt.x << " " << blobIterator->pt.y << std::endl;
