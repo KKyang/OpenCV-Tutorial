@@ -13,7 +13,8 @@ void camera::run()
         return;
 
     stopped = false;
-    cv::Mat frame;
+    cv::Mat frame, hough;
+    std::vector<cv::Vec3f> circles;
     cv::waitKey(100);
     cv::VideoWriter w;
 
@@ -21,8 +22,22 @@ void camera::run()
     while(!stopped)
     {
         cap >> frame;
-        emit sendFrame(frame);
+        cv::cvtColor(frame, hough, cv::COLOR_BGR2GRAY);
 
+        //Blur to avoid false circle.
+        //cv::GaussianBlur(hough, hough, cv::Size(5,5), 2, 2);
+
+        cv::HoughCircles(hough, circles, cv::HOUGH_GRADIENT, 1, hough.rows/8, 300, 100, 0, 0);
+        //Draw circle
+        for(size_t i = 0; i < circles.size();i++)
+        {
+            cv::Point center(cvRound(circles[i][0]), cvRound(circles[i][1]));
+            int radius = cvRound(circles[i][2]);
+
+            cv::circle(frame, center, 3, cv::Scalar(0, 255, 0), -1, 8, 0);
+            cv::circle(frame, center, radius, cv::Scalar(0, 0, 255), 3, 8, 0);
+        }
+        emit sendFrame(frame);
         w.write(frame);
     }
 
